@@ -10,7 +10,6 @@ const LoginPage = () => {
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-50">
             <div className="bg-white shadow-lg rounded-2xl p-10 w-full max-w-md text-center">
-                {/* Logo / Heading */}
                 <h1 className="text-2xl font-bold text-gray-800 mb-4">
                     Airtable based Form Builder
                 </h1>
@@ -18,16 +17,14 @@ const LoginPage = () => {
                     Login with your Airtable account
                 </p>
 
-                {/* Illustration */}
-                <div className="flex justify-center mb-6">
+                <div className="flex justify-center mb-8">
                     <img
-                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Airtable_Logo.svg/2560px-Airtable_Logo.svg.png"
+                        src="./Airtable_Logo.svg"
                         alt="Airtable"
-                        className="h-12"
+                        className="h-8"
                     />
                 </div>
 
-                {/* Button */}
                 <button
                     onClick={handleLogin}
                     className="w-full flex items-center justify-center gap-3 cursor-pointer bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition-all duration-200"
