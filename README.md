@@ -11,6 +11,68 @@ A full-stack MERN application that allows users to log in with their Airtable ac
 
 ---
 
+## Using the API
+
+The backend API is protected and requires a JWT Bearer Token for most endpoints. To get a token for testing with tools like Postman or Insomnia, follow these steps:
+
+1.  **Log In via the Frontend:** Go to the [live application site](https://dynamic-form-builder-cyan.vercel.app/) and log in with your Airtable account.
+2.  **Open Developer Tools:** After you are redirected to the dashboard, open your browser's developer tools (usually by pressing F12 or Ctrl+Shift+I).
+3.  **Find the Token in Local Storage:**
+    * Navigate to the **Application** tab.
+    * In the left-hand menu, open **Local Storage** and select the site URL.
+    * You will see a key named `authToken`. Copy the long string value associated with it.
+4.  **Use the Token:** This copied value is your Bearer Token. In your API client, set the `Authorization` header for your requests like this:
+    ```
+    Authorization: Bearer <paste_your_token_here>
+    ```
+5.  **Send the request:** Send the request with the respective endpoint from your API site.
+
+---
+
+## API Endpoints
+
+All endpoints are prefixed with `/api`.
+
+### Auth Routes
+
+* `GET /auth/airtable`
+    * **Description:** Initiates the Airtable OAuth 2.0 login flow.
+    * **Protected:** No
+
+* `GET /auth/callback`
+    * **Description:** The callback URL that Airtable redirects to after successful authentication. Handles the token exchange and user creation.
+    * **Protected:** No
+
+### Airtable Data Routes
+
+* `GET /airtable/bases`
+    * **Description:** Fetches a list of all Airtable bases accessible by the logged-in user.
+    * **Protected:** Yes
+
+* `GET /airtable/bases/:baseId/tables`
+    * **Description:** Fetches a list of all tables within a specified Airtable base.
+    * **Protected:** Yes
+
+### Form Routes
+
+* `GET /forms`
+    * **Description:** Fetches all forms created by the logged-in user.
+    * **Protected:** Yes
+
+* `POST /forms`
+    * **Description:** Creates a new form configuration and saves it to the database.
+    * **Protected:** Yes
+
+* `GET /forms/:formId`
+    * **Description:** Fetches the configuration for a single form.
+    * **Protected:** No (so anyone with the link can view the form)
+
+* `POST /forms/:formId/responses`
+    * **Description:** Submits a new response for a form, which is then saved to the connected Airtable table.
+    * **Protected:** No
+
+---
+
 ## Features
 
 * **Secure Airtable OAuth 2.0 Login:** Users can securely log in using their Airtable account. The application handles the entire OAuth flow, storing access tokens and user information in a MongoDB database.
